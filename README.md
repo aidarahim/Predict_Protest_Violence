@@ -3,7 +3,7 @@ Authors: Aida Rahim, Gabrielle Burgos, Asia Roy
 
 ### 1. Executive Summary
 
-Protests erupted across 2000 U.S. cities and 60 countries worldwide in support of the Black Lives Matter (BLM) movement following the killing of George Floyd by police in Minneapolis. Most protests were peaceful, though some escalated to violence, either from protestors or police. Protest participation is an important civic duty that we strongly support. It is perfectly reasonable to be concerned about safety, and want to participate only if the protest is peaceful with no threat of violence from either protestors or the police. In this work, we use protest data from June 2020 (the month immediately following the killing of George Floyd) to build classification models that predict violence at protests. Our models provide some indication that with the data at hand, it is possible to predict this with an accuracy slightly better than the baseline accuracy. We suggest that more accurate models can be built by performing a more extensive cleanup of the data to remove conflicts ahead of model building, and that better results may be obtained with more intelligent clustering of data prior to modeling.
+Protests erupted across 2000 U.S. cities and 60 countries worldwide in support of the Black Lives Matter (BLM) movement following the killing of George Floyd by police in Minneapolis. Most protests were peaceful, though some escalated to violence, either from protestors or police. Protest participation is an important civic duty that we strongly support. It is perfectly reasonable to be concerned about safety, and want to participate only if the protest is peaceful with no threat of violence from either protestors or the police. In this work, we use protest data from June 2020 (the month immediately following the killing of George Floyd) to build classification models that predict violence at protests. Our models provide some indication that with the data at hand, it is possible to predict this with an accuracy slightly better than the baseline accuracy (~90%). We suggest that more accurate models can be built by performing a more extensive cleanup of the data to remove conflicts ahead of model building, and that better results may be obtained with more intelligent clustering of data prior to modeling.
 
 A presentation that summarizes the results described here is hosted on [Tableau Public](https://public.tableau.com/profile/asia5424#!/vizhome/PredictingViolenceatProtestsFinal/Introduction?publish=yes) (download locally for best viewing) and summarized in a PDF here.
 
@@ -65,11 +65,15 @@ The following observations were made during the EDA process:
 * The 5 cities with the most protest events were: Portland, Chicago, Los Angeles, New York, and Philadelphia
 * The occurrence of violence at protests in these 5 cities (24%) is twice the national occurrence (12%)
 
+For NLP analysis of the text in the 'Notes' section of the data, sentiment ratings provided by VADER were evaluated. The analysis showed that most statements were neutral, which corresponds well to the unbiased note-taking carried out by a reputable organization.
+
 ## Modeling
 
 Two modeling approaches were considered:
 1. Using numerical and categorical features
 2. Using text data
+
+For both, the subset event type value of ‘Peaceful protest’ was considered the target variable. This column was dummified to provide binary values where all events other than ‘Peaceful protest’ was considered 'Violent'. The majority class in the original, unmodified dataset was ~90%.
 
 #### 1. Using numerical and categorical features
 Features considered were: protest host(s), total population, poverty rate, percent of population holding bachelor degrees, mayor status, population political affiliation, historical unarmed death records. The rationale for selecting these features is the assumption that perhaps underlying social structure influences presence or absence of protest violence.
@@ -81,8 +85,11 @@ Since the goal was to use current data to predict future occurrences, we applied
 We then attempted to cluster the data based on population size and built different models for cities below and above a threshold of 400,000. These resulted in better model performance for the larger cities, and worse for the smaller cities. However, this result is promising as it indicates that it may be possible to improve model performance by splitting the dataset into logical clusters prior to modeling.
 
 #### 2. Using text data
-As an alternative, we also tried building models to predict violence at protests using NLP and various classification models. Our attempts are based on notes related to the protests.
-<span style="color:blue">*Will update with info from Gaby.*</span>
+As an alternative, we also tried building models to predict violence at protests using NLP and various classification models. Our attempts were based on notes related to the protests. The text within the ‘Notes' column was tokenized using both Count Vectorizer and TFID Vectorizer, after undersampling from the majority class.
+
+4 models were evaluated: Multinomial Naive Bayes, Logistic Regression, Random Forest Classifier, and Support Vector Machine. Hyperparameter tuning was carried out using a gridsearch method.
+
+Most models performed very well, which is not surprising considering the well-documented data provided by the ACLED. Our regression models and our SVM models had the lowest false prediction analysis. Out of all positive predictions, 94% to 97% of protests were accurately predicted to have a peaceful outcome during 2020-2021.
 
 ## Conclusions / Recommendations
 
