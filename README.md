@@ -9,7 +9,7 @@ In this work, we use protest data from June 2020 (the month immediately followin
 
 A presentation that summarizes the results described here is hosted on [Tableau Public](https://public.tableau.com/profile/asia5424#!/vizhome/PredictingViolenceatProtestsFinal/Introduction?publish=yes) (download locally for best viewing) and summarized in a PDF here.
 
-<img src="./images/Protest_Art.PNG" alt="Drawing" style="width: 1000px;"/>
+<img src="./images/Protest_Art.png" alt="Protest Art" style="width: 1000px;"/>
 
 ## Introduction
 On May 25, 2020, George Floyd was killed by police in Minneapolis. National (and international) civil unrest and protest arose in response, from a population plagued by police violence especially against the black population, and whose discontent was possibly exacerbated by Covid 19-related lockdowns. Protests erupted across 2000 cities and 60 countries in support of Black Lives Matter (BLM) movement. Most protests were peaceful, though some escalated to violence, either from protestors or police. We use the data collected here to predict violence occurring at protests, without discriminating between violence caused by protestors or violent police response.
@@ -19,7 +19,7 @@ Is it possible to predict violence erupting at protests?
 
 ## Exploratory Data Analysis
 
-<img src="./images/Figures.PNG" alt="Drawing" style="width: 1000px;"/>
+<img src="./images/Figures.png" alt="Data Trends" style="width: 1000px;"/>
 
 The following observations were made during the EDA process:
 * The distribution of protests match the distribution of population density, as expected (A in figure above)
